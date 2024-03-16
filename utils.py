@@ -82,5 +82,5 @@ def big_number_to_string_number(x, round_to=1):
     if x < 10000:
         return str(x)
     if x < 1000000:
-        return str(round(x / 1000, round_to)) + "K"
-    return str(round(x / 1000000, round_to)) + "M"
+        return str(round(x / 1000, round_to) * 1000) 
+    return str(round(x / 1000000, round_to) * 1000000)
