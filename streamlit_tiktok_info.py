@@ -10,6 +10,8 @@ import streamlit_authenticator as stauth
 from yaml.loader import SafeLoader
 import yaml
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 with open('./config.yaml') as file:
     config = yaml.load(file, Loader=SafeLoader)
@@ -26,7 +28,7 @@ authenticator = stauth.Authenticate(
 
 st.title("Tiktok Info")
 
-
+@st.cache_data
 def get_info(username):
     url = f"https://tokapi-mobile-version.p.rapidapi.com/v1/user/@{username}"
 
@@ -39,6 +41,7 @@ def get_info(username):
 
     return response.json()
 
+@st.cache_data
 def get_posts(user_id):
     url = f"https://tokapi-mobile-version.p.rapidapi.com/v1/post/user/{user_id}/posts"
 
