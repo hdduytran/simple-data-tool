@@ -85,6 +85,7 @@ authenticator.login()
 if st.session_state["authentication_status"]:
 
     links = st.text_area("Enter Tiktok links", "https://www.tiktok.com/@tiktok")
+    links = links.strip()
     if links and st.button("Get Info"):
         with st.spinner("Getting info..."):
             info_placeholder = st.empty()
