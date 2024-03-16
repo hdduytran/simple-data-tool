@@ -126,7 +126,10 @@ if st.session_state["authentication_status"]:
                 df["bio_url"] = df["bio_url"].apply(lambda x: x or "")
                 df["bio"] = df["bio"] + df["bio_url"]
                 cols = ["url","sec_uid","latest_post","follower","has_shop","bio"]
-                df = df[cols]
+                try:
+                    df = df[cols]
+                except Exception as e:
+                    pass
                 # df.to_csv("tiktok.csv", index=False)
                 df_placeholder.write(df)
       
