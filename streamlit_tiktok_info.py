@@ -45,7 +45,7 @@ def get_posts(user_id):
     querystring = {"offset":"0","count":"10","region":"VN","with_pinned_posts":"1"}
 
     headers = {
-        "X-RapidAPI-Key": "d1583bfe26msh53d8ca2e32d95c3p182a27jsn990cb23d366c",
+        "X-RapidAPI-Key": os.getenv("RAPIDAPI_KEY"),
         "X-RapidAPI-Host": "tokapi-mobile-version.p.rapidapi.com"
     }
 
