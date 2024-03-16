@@ -113,6 +113,7 @@ if st.session_state["authentication_status"]:
                 df["follower"] = df["follower"].apply(lambda x: big_number_to_string_number(x))
                 df["other_url"] = df["bio"].apply(lambda x: extract_url(x) if x else None)
                 df["url"] = df["username"].apply(lambda x: f"https://www.tiktok.com/@{x}")
+                df["bio_url"] = df["bio_url"].apply(lambda x: x or "")
                 df["bio"] = df["bio"] + df["bio_url"]
                 cols = ["url","sec_uid","latest_post","follower","has_shop","bio"]
                 df = df[cols]
