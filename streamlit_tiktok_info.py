@@ -30,7 +30,7 @@ st.title("Tiktok Info")
 
 @st.cache_data
 def get_info(username):
-    url = f"https://tokapi-mobile-version.p.rapidapi.com/v1/user/@{username}"
+    url = f"https://tokapi-mobile-version.p.rapidapi.com/v1/user/{username}"
 
     headers = {
         "X-RapidAPI-Key": os.getenv("RAPIDAPI_KEY"),
