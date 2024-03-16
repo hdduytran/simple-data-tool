@@ -57,7 +57,11 @@ def get_posts(user_id):
     return response.json()
 
 def url2username(url):
-    return re.search(r"tiktok.com/@(\w+)", url).group(1)
+    username = url.split("/")[-1]
+    if "MS4wLjA" in username:
+        return username[1:]
+    else:
+        return username
 
 MAPPING_POST = {
     "share_url": ["share_url"],
@@ -93,11 +97,13 @@ if st.session_state["authentication_status"]:
             links = links.split("\n")
             results = []
             for link in links:
+                transformed = {"url": link}
                 username = url2username(link)
                 info_placeholder.markdown(f"Getting info for **{username}**...")
                 try:
                     info = get_info(username)
-                    transformed = Common.mapping_data(info, MAPPING)
+                    transformed_ = Common.mapping_data(info, MAPPING)
+                    transformed.update(transformed_)
                     post_list = get_posts(transformed["uid"])
                     try:
                         post_list = post_list["aweme_list"]
@@ -116,7 +122,7 @@ if st.session_state["authentication_status"]:
                 df = pd.DataFrame(results)
                 df["follower"] = df["follower"].apply(lambda x: big_number_to_string_number(x))
                 # df["other_url"] = df["bio"].apply(lambda x: extract_url(x) if x else None)
-                df["url"] = df["username"].apply(lambda x: f"https://www.tiktok.com/@{x}")
+                # df["url"] = df["username"].apply(lambda x: f"https://www.tiktok.com/@{x}")
                 df["bio_url"] = df["bio_url"].apply(lambda x: x or "")
                 df["bio"] = df["bio"] + df["bio_url"]
                 cols = ["url","sec_uid","latest_post","follower","has_shop","bio"]
