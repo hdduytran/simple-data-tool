@@ -28,7 +28,7 @@ authenticator = stauth.Authenticate(
 
 st.title("Tiktok Info")
 
-@st.cache_data
+# @st.cache_data
 def get_info(username):
     url = f"https://tokapi-mobile-version.p.rapidapi.com/v1/user/{username}"
 
@@ -41,7 +41,7 @@ def get_info(username):
 
     return response.json()
 
-@st.cache_data
+# @st.cache_data
 def get_posts(user_id):
     url = f"https://tokapi-mobile-version.p.rapidapi.com/v1/post/user/{user_id}/posts"
 
@@ -126,7 +126,7 @@ if st.session_state["authentication_status"]:
                 df["bio_url"] = df["bio_url"].apply(lambda x: x or "")
                 df["bio"] = df["bio"] + df["bio_url"]
                 df["standard_url"] = df["username"].apply(lambda x: f"https://www.tiktok.com/@{x}")
-                cols = ["url","sec_uid","latest_post","follower","has_shop","bio","username","standard_url"]
+                cols = ["url","sec_uid","latest_post","follower","has_shop","bio", "standard_url"]
                 try:
                     df = df[cols]
                 except Exception as e:
