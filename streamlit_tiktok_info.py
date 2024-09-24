@@ -28,7 +28,7 @@ authenticator = stauth.Authenticate(
 
 st.title("Tiktok Info")
 
-# @st.cache_data
+@st.cache_data
 def get_info(username):
     url = f"https://tokapi-mobile-version.p.rapidapi.com/v1/user/{username}"
 
@@ -41,7 +41,7 @@ def get_info(username):
 
     return response.json()
 
-# @st.cache_data
+@st.cache_data
 def get_posts(user_id):
     url = f"https://tokapi-mobile-version.p.rapidapi.com/v1/post/user/{user_id}/posts"
 
